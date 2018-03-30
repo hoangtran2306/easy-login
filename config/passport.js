@@ -153,7 +153,7 @@ module.exports = function(passport) {
         process.nextTick(function() {
             const options = {
                 method: 'POST',
-                uri: 'http://localhost:4001/auth',
+                uri: 'http://localhost:4001/',
                 body: {
                     socialToken: token,
                     provider: 'facebook'
@@ -161,7 +161,7 @@ module.exports = function(passport) {
                 json: true,
                 encoding: 'utf8'
             };
-            console.log('test')
+            // console.log('test')
             var access_token;
             
             // var test = JSON.parse(request(options)
