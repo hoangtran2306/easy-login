@@ -58,10 +58,10 @@ module.exports = function(app, passport) {
 
         // handle the callback after facebook has authenticated the user
         app.get('/auth/facebook/callback',
-            function(req, res) {
-            // Process the data received in req.body
-            res.redirect('/profile');
-        });
+            passport.authenticate('facebook', {
+                successRedirect : '/profile',
+                failureRedirect : '/'
+            }));
 
     // twitter --------------------------------
 
