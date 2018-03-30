@@ -21,14 +21,12 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-        done(null, user.id);
+        done(null, user);
     });
 
     // used to deserialize the user
-    passport.deserializeUser(function(id, done) {
-        User.findById(id, function(err, user) {
-            done(err, user);
-        });
+    passport.deserializeUser(function(user, done) {
+        done(null, user);
     });
 
     // =========================================================================
@@ -153,7 +151,7 @@ module.exports = function(passport) {
         process.nextTick(function() {
             const options = {
                 method: 'POST',
-                uri: 'http://localhost:4001/',
+                uri: 'http://api.kontami.ml/auth',
                 body: {
                     socialToken: token,
                     provider: 'facebook'
@@ -171,21 +169,19 @@ module.exports = function(passport) {
 
             request(options)
                 .then(function (res){
-                    var newUser            = new User();
+                    var newUser            = {};
                     access_token = res.accessToken;
-                    
+                    newUser.facebook = {}
+                    newUser.local = {}
+                    newUser.twitter = {}
+                    newUser.google = {}
                     newUser.facebook.id    = profile.id;
                     newUser.facebook.token = token;
                     newUser.access_token = access_token
                     newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
                     newUser.facebook.email = (profile.emails[0].value || '').toLowerCase();
                     console.log(newUser.access_token)
-                    newUser.save(function(err) {
-                        if (err)
-                            return done(err);
-                                       
-                        return done(null, newUser);
-                    });
+                    return done(null, newUser);
                 });
         });
 
