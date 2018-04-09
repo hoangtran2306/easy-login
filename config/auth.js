@@ -18,9 +18,9 @@ module.exports = {
     },
 
     'googleAuth' : {
-        'clientID'         : 'your-secret-clientID-here',
-        'clientSecret'     : 'your-client-secret-here',
-        'callbackURL'      : 'http://localhost:8080/auth/google/callback'
+        'clientID'         : '286871931908-4c482j5vnodm9go07fekvr8km6eqtk9i.apps.googleusercontent.com',
+        'clientSecret'     : 'TtyJ8FnFONPyvYXpKbdI2Gdq',
+        'callbackURL'      : 'http://login-demo.kontami.ml/auth/google/callback'
     }
 
 };
